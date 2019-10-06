@@ -1,5 +1,60 @@
 
-var result = `
+var md =`
+	# 简介
+	我叫 Jonson ，学习前端半年，想应聘前端工程师岗位。
+
+	# 技能
+	- Javascript
+	- CSS
+	- HTML
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+
+	# 联系
+	- 手机：13083974493
+	- QQ：8739839
+	- 微博：Jonson
+`
+
+var css1 =`
 	/*
 	大家好，作为一个工程师
 	我当然要用代码装个(失败的)x了
@@ -30,6 +85,14 @@ var result = `
 		color: #DD4A68;
 	}
 
+	#displayCode{
+		width: 49%;
+		height: 95%;
+		position: fixed;
+		left: 9px;
+		margin-top: 9px;
+	}
+
 	/* 加点可怕的 3D 效果 */
 
 	#displayCode{
@@ -39,7 +102,7 @@ var result = `
 	/* 加点失败的呼吸效果 */
 
 	#displayCode{
-		animation: breath 0.5s infinite alternate-reverse;
+  		animation: breath 3s infinite alternate-reverse;
 	}
 
 	/* 我要一张白纸 */
@@ -54,86 +117,45 @@ var result = `
 	#resumePaper{
 		width: 49%;
 		height: 95%;
-		background: white;
+		color: white;
+		background: no-repeat url('https://w.wallhaven.cc/full/p8/wallhaven-p8gj8j.jpg');
+		box-shadow: 2px 2px 6px 2px rgba(184,178,184,1);
 		position: fixed;
 		right: 9px;
 		margin-top: 9px;
 		padding: 3px;
-		border: 1px solid brown;
 	}
 	.content{
 		width: 100%;
 		height: 100%;
-		background: white;
+		background: rgba(0,0,0,0)
+		font-size: 16px;
+		overflow: auto;
 	}
 `
 
-var result2 = `
-	#resumePaper{}
+var css2 =`
+	/*接下来用 marked.js 库
+	把 markdown 变成 HTML*/
 `
 
-var md = `
-	# 简介
-	我叫 Jonson ，学习前端半年，想应聘前端工程师岗位。
-
-	# 技能
-	- Javascript
-	- CSS
-	- HTML
-
-	# 项目
-	- xx 轮播
-	- xx 简历
-	- xx 画板
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
+var css3 =`
+	/*以上，感谢观看。*/
 `
 
-writeDisplayCode('',result,()=>{
+writeDisplayCode('',css1,()=>{
 	createPaper( ()=>{
-		writeDisplayCode(result, result2, ()=>{
-			writeMarkdown(md)
+		writeMarkdown(md,()=>{
+			writeDisplayCode(css1,css2,()=>{
+				convertMarkdownToHTML( ()=>{
+					writeDisplayCode(css1+css2, css3,()=>{
+						alert('完成')
+					})
+				})
+			})
 		})
 	})
 })
-
-function writeMarkdown(markdown, fn){
-	var domPaper = document.querySelector('#resumePaper > .content')
-	var n = 0
-
-	var id = setInterval( ()=>{
-		n += 1
-		domPaper.innerHTML = markdown.slice(0,n)
-		domPaper.scrollTop = domPaper.scrollHeight
-		if(n >= markdown.length){
-			window.clearInterval(id)
-			fn()
-		}
-	},10)
-}
 
 function writeDisplayCode(prefix,code,fn){
 	displayCode.innerHTML = prefix || ''
@@ -150,6 +172,23 @@ function writeDisplayCode(prefix,code,fn){
 	},10 )
 }
 
+function writeMarkdown(markdown, fn){
+	var domPaper = document.querySelector('#resumePaper > .content')
+	var n = 0
+
+	var id = setInterval( ()=>{
+		n += 1
+		domPaper.innerHTML = markdown.slice(0,n)
+		// domPaper.innerHTML = marked(markdown.slice(0,n))
+		domPaper.scrollTop = domPaper.scrollHeight
+		if(n >= markdown.length){
+			window.clearInterval(id)
+			fn.call()
+		}
+	},10)
+}
+
+
 function createPaper(fn){
 	var paper = document.createElement('div')
 	paper.id = 'resumePaper'
@@ -159,5 +198,22 @@ function createPaper(fn){
 	document.body.appendChild(paper)
 	fn.call()
 }
+
+function convertMarkdownToHTML(fn){
+	var div = document.createElement('div')
+	div.className = 'html markdownBody'
+	div.innerHTML = marked(md)
+	var markdownContainer = document.querySelector('#resumePaper > .content')
+	markdownContainer.replaceWith(div)
+	fn.call()
+}
+
+
+
+
+
+
+
+
 
 
