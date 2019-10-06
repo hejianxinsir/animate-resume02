@@ -1,0 +1,19 @@
+
+*{margin: 0; padding: 0;}
+*{box-sizing: border-box}
+#displayCode{
+	height: 100vh;
+	overflow: auto;
+}
+
+.token.selector{
+	color: gray;
+}
+
+.token.property{
+	color: gray;
+}
+
+.token.function{
+	color: gray;
+}
