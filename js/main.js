@@ -1,4 +1,3 @@
-
 var md =`
 	# 简介
 	我叫 Jonson ，学习前端半年，想应聘前端工程师岗位。
@@ -144,11 +143,11 @@ var css3 =`
 `
 
 writeDisplayCode('',css1,()=>{
-	createPaper( ()=>{
-		writeMarkdown(md,()=>{
+	createPaper(()=>{
+		writeMarkdown(md, ()=>{
 			writeDisplayCode(css1,css2,()=>{
-				convertMarkdownToHTML( ()=>{
-					writeDisplayCode(css1+css2, css3,()=>{
+				convertMarkdownToHtml(()=>{
+					writeDisplayCode(css1 + css2, css3, ()=>{
 						alert('完成')
 					})
 				})
@@ -175,11 +174,9 @@ function writeDisplayCode(prefix,code,fn){
 function writeMarkdown(markdown, fn){
 	var domPaper = document.querySelector('#resumePaper > .content')
 	var n = 0
-
 	var id = setInterval( ()=>{
 		n += 1
 		domPaper.innerHTML = markdown.slice(0,n)
-		// domPaper.innerHTML = marked(markdown.slice(0,n))
 		domPaper.scrollTop = domPaper.scrollHeight
 		if(n >= markdown.length){
 			window.clearInterval(id)
@@ -192,20 +189,21 @@ function writeMarkdown(markdown, fn){
 function createPaper(fn){
 	var paper = document.createElement('div')
 	paper.id = 'resumePaper'
-	var content = document.createElement('pre')
+	var content = document.createElement('div')
 	content.className = 'content'
 	paper.appendChild(content)
 	document.body.appendChild(paper)
 	fn.call()
 }
 
-function convertMarkdownToHTML(fn){
-	var div = document.createElement('div')
-	div.className = 'html markdownBody'
-	div.innerHTML = marked(md)
-	var markdownContainer = document.querySelector('#resumePaper > .content')
-	markdownContainer.replaceWith(div)
-	fn.call()
+
+function convertMarkdownToHtml(fn){
+  var div = document.createElement('div')  
+  div.className = 'html markdownBody'
+  div.innerHTML = marked(`# 标题`)
+  let markdownContainer = document.querySelector('#resumePaper > .content')
+  markdownContainer.replaceWith(div)
+  fn.call()
 }
 
 
