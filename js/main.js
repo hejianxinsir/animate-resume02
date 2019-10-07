@@ -1,4 +1,4 @@
-var md =`
+var markD =`
 	# 简介
 	我叫 Jonson ，学习前端半年，想应聘前端工程师岗位。
 
@@ -144,7 +144,7 @@ var css3 =`
 
 writeDisplayCode('',css1,()=>{
 	createPaper(()=>{
-		writeMarkdown(md, ()=>{
+		writeMarkdown(markD, ()=>{
 			writeDisplayCode(css1,css2,()=>{
 				convertMarkdownToHtml(()=>{
 					writeDisplayCode(css1 + css2, css3, ()=>{
@@ -200,7 +200,7 @@ function createPaper(fn){
 function convertMarkdownToHtml(fn){
   var div = document.createElement('div')  
   div.className = 'html markdownBody'
-  div.innerHTML = marked(`# 标题`)
+  div.innerHTML = marked(markD)
   let markdownContainer = document.querySelector('#resumePaper > .content')
   markdownContainer.replaceWith(div)
   fn.call()
