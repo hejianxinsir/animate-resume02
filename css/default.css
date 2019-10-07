@@ -3,7 +3,7 @@
 *{box-sizing: border-box}
 #displayCode{
 	height: 100vh;
-	overflow: hidden;
+	overflow: auto;
 }
 .token.selector{
 	color: gray;
@@ -15,6 +15,17 @@
 
 .token.function{
 	color: gray;
+}
+
+.markdownBody{
+	padding: 21px;
+}
+
+.markdownBody > ul,ol{
+	margin-left: 35px;
+}
+.markdownBody > h2{
+	margin: 12px 0 7px 0;
 }
 
 @keyframes breath{

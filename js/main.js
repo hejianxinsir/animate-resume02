@@ -1,46 +1,32 @@
-var md =`
-	# 简介
-	我叫 Jonson ，学习前端半年，想应聘前端工程师岗位。
+var md = `
+## 自我介绍
+我叫 XXX
+1990 年 1 月出生
+XXX 学校毕业
+自学前端半年
+希望应聘前端开发岗位
 
-	# 技能
-	- Javascript
-	- CSS
-	- HTML
+## 技能介绍
+熟悉 JavaScript CSS
+## 项目介绍
+1. XXX 轮播
+2. XXX 简历
+3. XXX 画板
 
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
+## 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
 
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
+## 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
 
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
-
-	# 联系
-	- 手机：13083974493
-	- QQ：8739839
-	- 微博：Jonson
+## 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
 `
 
 var css1 =`
@@ -179,7 +165,7 @@ function writeMarkdown(markdown, fn){
 function createPaper(fn){
 	var paper = document.createElement('div')
 	paper.id = 'resumePaper'
-	var content = document.createElement('div')
+	var content = document.createElement('pre')
 	content.className = 'content'
 	paper.appendChild(content)
 	document.body.appendChild(paper)
